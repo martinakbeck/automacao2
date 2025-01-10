@@ -1,0 +1,10 @@
+Cypress.Commands.add("editaProduto", (nome, valor, cores) => {
+    cy.url().should('contains', '/produto/editar/')
+    cy.get('#produtonome').should('be.visible').clear().type(nome)
+    cy.get('#produtovalor').should('be.visible').clear().type(valor)
+    cy.get('#produtocores').should('be.visible').clear().type(cores)
+    cy.get('button.btn')
+        .should('be.visible')
+        .and('have.css', 'background-color', 'rgb(38, 166, 154)')
+        .click()
+})

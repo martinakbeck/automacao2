@@ -2,7 +2,7 @@ name: "Execução Post Deploy"
 
 on:
   workflow_run:
-    workflows:["Execução manual"] #Seria o nome do job do deploy
+    workflows: ["Execução manual"] #Seria o nome do job do deploy
     types:
       - completed
 

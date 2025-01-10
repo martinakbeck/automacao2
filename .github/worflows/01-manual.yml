@@ -2,7 +2,7 @@ name: "Execução Manual"
 
 # Gatilho de execução manual = workflow_dispatch
 on:
-  workflow_dispath:
+  workflow_dispatch:
 
 jobs:
   e2e-tests:

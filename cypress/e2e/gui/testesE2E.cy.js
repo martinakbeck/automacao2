@@ -1,7 +1,7 @@
 const { faker } = require("@faker-js/faker");
 
-const usuario = Cypress.env('username')
-const senha = Cypress.env('password')
+const usuario = Cypress.env('LOGIN')
+const senha = Cypress.env('SENHA')
 
 describe('Fluxo E2E', () => {
     beforeEach(() => {

@@ -5,7 +5,7 @@ const senha = Cypress.env('password')
 
 describe('Fluxo E2E', () => {
     beforeEach(() => {
-        cy.login(usuario, senha)
+        cy.login("martina2024", "martina2024")
         cy.url().should('include', '/produto')
     });
     it('Criar produto com sucesso', () => {
@@ -49,7 +49,7 @@ describe('Fluxo E2E', () => {
 
 describe('Fluxo de Produto', () => {
     beforeEach(() => {
-        cy.login(usuario, senha)
+        cy.login("martina2024", "martina2024")
         cy.url().should('include', '/produto')
     });
     it('Adicionar produto sem nenhuma informação', () => {
@@ -130,7 +130,7 @@ describe('Fluxo de Produto', () => {
 
 describe('Fluxo de Componente', () => {
     beforeEach(() => {
-        cy.login(usuario, senha)
+        cy.login("martina2024", "martina2024")
         cy.url().should('include', '/produto')
         cy.novoProduto('Abacaxi', '8,00', 'Amarelo')
     });
@@ -191,7 +191,7 @@ describe('Fluxo de Componente', () => {
 
 describe('Verificação de particionamento', () => {
     beforeEach(() => {
-        cy.login(usuario, senha)
+        cy.login("martina2024", "martina2024")
         cy.url().should('include', '/produto')
     });
     it('Valor mínimo (0) no produto', () => {
@@ -306,7 +306,7 @@ describe('Login inválido', () => {
 
 describe('Sair do Sistema', () => {
     beforeEach(() => {
-        cy.login(usuario, senha);
+        cy.login("martina2024", "martina2024")
     });
 
     it('Sair do sistema na página Lista de Produtos', () => {
@@ -336,7 +336,7 @@ describe('Sair do Sistema', () => {
 
 describe('Acessibilidades', () => {
     beforeEach(() => {
-        cy.login(usuario, senha);
+        cy.login("martina2024", "martina2024")
     });
     afterEach(() => {
         cy.pageAccessibility()

@@ -1,0 +1,28 @@
+name: "Execução Integrada"
+
+# Gatilho de execução manual = workflow_dispatch
+on:
+  workflow_dispatch:
+
+jobs:
+  e2e-tests:
+    # Rodar testes na máquina virtual
+    runs-on: ["ubuntu-latest"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # Teria os outros jobs caso fosse um .yml compartilhado
+      #Pode ter um job para teste unitário, um para teste de integração, um para ferramentas de S/DAST
+
+      - name: Instalando testes de acessibilidade
+        run: npm i cypress-axe cypress-axe-core
+
+      - name: Instalando o relatório de testes
+        run: npm i mochawesome cypress-mochawesome-reporter --save-dev
+
+      - name: Testes E2E
+        env:
+          CYPRESS_LOGIN: ${{ secrets.LOGIN }}
+          CYPRESS_SENHA: ${{ secrets.SENHA }}
+        run: npx cypress run

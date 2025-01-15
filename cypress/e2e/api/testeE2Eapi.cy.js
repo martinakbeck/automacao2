@@ -1,15 +1,17 @@
 const { faker } = require("@faker-js/faker");
+const usuario = Cypress.env('LOGIN')
+const senha = Cypress.env('SENHA')
 
 let valorToken
 let url = "http://165.227.93.41/lojinha/v2/"
+
 let produtoId, produtoNome, produtoValor, produtoCores
 let componenteId, componenteNome, componenteQuantidade
+
 let fakerNome, fakerLogin, fakerSenha
 let tokenInvalido = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvaWQiOiIxODQyOCIsInVzdWFyaW9sb2dpbiI6Im1hcnRpbmEyMDI0IiwidXN1YXJpb25vbWUiOiJNYXJ0aW5hIn0.mD5SAis3mC-NXdbMaBnrvqd0Gr1TxX-vAY90HOqLiC"
 let nomeMais100 = "Teste teste teste teste Teste teste teste teste Teste teste teste teste Teste teste teste teste teste"
 
-const usuario = Cypress.env('LOGIN')
-const senha = Cypress.env('SENHA')
 
 describe('Fluxo login', () => {
     it('Login com credenciais válidas (200)', () => {
@@ -352,8 +354,13 @@ describe('Fluxo de Produto', () => {
     it('Buscar um dos produtos do usuário (200)', () => {
         cy.buscarUmProdutoAPI(url, valorToken, produtoId).then((response) => {
             expect(response.status).to.eq(200)
-            expect(response.body.data.produtoId).to.eq(produtoId).that.is.a('number')
-            expect(response.body.data.produtoNome).to.eq(produtoNome).that.is.a('string')
+            produtoNome = response.body.data[0].produtoNome
+            produtoValor = response.body.data[0].produtoValor
+            produtoCores = response.body.data[0].produtoCores
+            expect(response.status).to.eq(200)
+            expect(response.body.data[0]).to.have.property("produtoNome", produtoNome).that.is.a("string")
+            expect(response.body.data[0]).to.have.property("produtoValor", produtoValor).that.is.a("number")
+            expect(response.body.data[0]).to.have.property("produtoCores", produtoCores).that.is.a("Array")
 
             expect(response.body).to.have.property("message", "Detalhando dados do produto")
             expect(response.body).to.have.property("error", "")
@@ -658,7 +665,6 @@ describe('Verificação de particionamento', () => {
     after(() => {
         cy.limparDadosAPI(url, valorToken)
     })
-
     it('Adicionar produto com valor negativo (422)', () => {
         cy.novoProdutoAPI(url, valorToken, "Teste Particionamento", 0, ["Amarelo"], "Novo Componente", 5).then((response) => {
             expect(response.status).to.eq(422)
@@ -748,4 +754,3 @@ describe('Verificação de particionamento', () => {
         })
     });
 });
-

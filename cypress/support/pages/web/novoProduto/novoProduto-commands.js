@@ -1,4 +1,4 @@
-Cypress.Commands.add("novoProduto", (nome, valor, cores)=> {
+Cypress.Commands.add("novoProduto", (nome, valor, cores) => {
     cy.get('.waves-effect')
         .should('be.visible')
         .and('have.css', 'background-color', 'rgb(38, 166, 154)')
@@ -11,5 +11,6 @@ Cypress.Commands.add("novoProduto", (nome, valor, cores)=> {
         .should('be.visible')
         .and('have.css', 'background-color', 'rgb(38, 166, 154)')
         .click()
-    
+
 })
+
